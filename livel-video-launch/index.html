@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/Livel/Downloads/video_lanzamiento_LIVEL_1.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVEL - Video Lanzamiento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #000;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+        }
+        
+        .scene {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            padding: 60px;
+            text-align: center;
+        }
+        
+        .scene.active {
+            opacity: 1;
+            z-index: 10;
+        }
+        
+        .scene h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(139, 111, 207, 0.5);
+        }
+        
+        .scene p {
+            font-size: 1.8rem;
+            max-width: 900px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .scene.dark {
+            background: #000;
+        }
+        
+        .scene.light {
+            background: linear-gradient(135deg, #8b6fcf 0%, #b99ae0 100%);
+        }
+        
+        /* Animación de partículas */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #f59e0b;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise 8s infinite;
+        }
+        
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* Logo animado */
+        .logo-animate {
+            width: 400px;
+            height: 400px;
+            margin: 40px auto;
+        }
+        
+        .logo-animate svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 40px rgba(139, 111, 207, 0.6));
+        }
+        
+        /* Texto destacado */
+        .highlight {
+            color: #f59e0b;
+            font-weight: 900;
+        }
+        
+        .purple-text {
+            color: #8b6fcf;
+        }
+        
+        /* Controles */
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .controls button {
+            padding: 15px 30px;
+            background: rgba(139, 111, 207, 0.9);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        
+        .controls button:hover {
+            background: #8b6fcf;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 111, 207, 0.5);
+        }
+        
+        /* Indicador de progreso */
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #8b6fcf, #f59e0b);
+            transition: width 0.5s;
+            z-index: 1001;
+        }
+        
+        /* Contador */
+        .scene-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            font-size: 14px;
+            opacity: 0.7;
+            z-index: 1000;
+        }
+        
+        /* Fade effect */
+        .fade-in {
+            animation: fadeIn 2s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="progress" style="width: 14.2857%;"></div>
+    <div class="scene-counter" id="counter">1 / 7</div>
+    
+    <div class="video-container">
+        <!-- ESCENA 1: Oscuridad -->
+        <div class="scene dark active" data-scene="1">
+            <div class="fade-in">
+                <h1>2 de febrero de 2022</h1>
+                <p>Todo terminó.<br>O eso creía.</p>
+            </div>
+        </div>
+        
+        <!-- ESCENA 2: Despertar -->
+        <div class="scene" data-scene="2">
+            <div class="fade-in">
+                <h1>Desperté sin memoria</h1>
+                <p>Sin saber quién era.<br>Sin recordar mi pasado.<br>Sin entender mi propósito.</p>
+            </div>
+            <div class="particles"></div>
+        </div>
+        
+        <!-- ESCENA 3: Renacimiento -->
+        <div class="scene light" data-scene="3">
+            <div class="fade-in">
+                <h1>Pero había una <span class="highlight">LUZ</span></h1>
+                <p>Mi hermana nutricionista me dio razón para vivir.<br>Yo le di <span class="purple-text">tecnología</span>.</p>
+            </div>
+        </div>
+        
+        <!-- ESCENA 4: Logo -->
+        <div class="scene" data-scene="4">
+            <div class="fade-in">
+                <div class="logo-animate">
+                    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <lineargradient id="purpleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9b7fd9"></stop>
+                                <stop offset="100%" style="stop-color:#8b6fcf"></stop>
+                            </lineargradient>
+                            <radialgradient id="sunGrad" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#ffbb33"></stop>
+                                <stop offset="100%" style="stop-color:#f59e0b"></stop>
+                            </radialgradient>
+                        </defs>
+                        
+                        <!-- Sol -->
+                        <g>
+                            <path d="M 300 80 L 300 50" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" opacity="0.9"></path>
+                            <path d="M 350 95 L 370 75" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" opacity="0.9"></path>
+                            <path d="M 380 130 L 405 120" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" opacity="0.9"></path>
+                            <path d="M 250 95 L 230 75" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" opacity="0.9"></path>
+                            <path d="M 220 130 L 195 120" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" opacity="0.9"></path>
+                            <circle cx="300" cy="170" r="45" fill="url(#sunGrad)"></circle>
+                        </g>
+                        
+                        <!-- V -->
+                        <path d="M 150 220 L 300 520 L 450 220 L 400 220 L 300 430 L 200 220 Z" fill="url(#purpleGrad)" stroke="#7557b8" stroke-width="3"></path>
+                        
+                        <!-- Texto LIVEL -->
+                        <text x="300" y="580" font-family="Arial Black" font-size="60" font-weight="900" fill="#8b6fcf" text-anchor="middle" letter-spacing="8">LIVEL</text>
+                    </svg>
+                </div>
+                <h1 style="font-size: 5rem; margin-top: 20px;">LIVEL</h1>
+                <p>Nació el día que renací</p>
+            </div>
+        </div>
+        
+        <!-- ESCENA 5: Propósito -->
+        <div class="scene light" data-scene="5">
+            <div class="fade-in">
+                <h1>Transformando vidas</h1>
+                <p>Cada plan nutricional es una <span class="highlight">segunda oportunidad</span>.<br>
+                Cada nutricionista que usa LIVEL entiende el <span class="purple-text">poder del renacimiento</span>.</p>
+            </div>
+        </div>
+        
+        <!-- ESCENA 6: Tecnología con alma -->
+        <div class="scene" data-scene="6">
+            <div class="fade-in">
+                <h1>No es solo software</h1>
+                <p>Es tecnología que <span class="highlight">entiende</span>.<br>
+                Hecha por humanos que renacieron.<br>
+                Para profesionales que <span class="purple-text">transforman vidas</span>.</p>
+            </div>
+        </div>
+        
+        <!-- ESCENA 7: CTA Final -->
+        <div class="scene light" data-scene="7">
+            <div class="fade-in">
+                <h1>Porque las segundas oportunidades existen</h1>
+                <div class="logo-animate" style="width: 300px; height: 300px;">
+                    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <lineargradient id="purpleGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9b7fd9"></stop>
+                                <stop offset="100%" style="stop-color:#8b6fcf"></stop>
+                            </lineargradient>
+                            <radialgradient id="sunGrad2" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#ffbb33"></stop>
+                                <stop offset="100%" style="stop-color:#f59e0b"></stop>
+                            </radialgradient>
+                        </defs>
+                        
+                        <g>
+                            <path d="M 300 80 L 300 50" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"></path>
+                            <path d="M 350 95 L 370 75" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"></path>
+                            <path d="M 250 95 L 230 75" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"></path>
+                            <circle cx="300" cy="170" r="45" fill="url(#sunGrad2)"></circle>
+                        </g>
+                        
+                        <path d="M 150 220 L 300 520 L 450 220 L 400 220 L 300 430 L 200 220 Z" fill="url(#purpleGrad2)" stroke="#7557b8" stroke-width="3"></path>
+                        
+                        <text x="300" y="580" font-family="Arial Black" font-size="60" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="8">LIVEL</text>
+                    </svg>
+                </div>
+                <p style="font-size: 2.5rem; margin-top: 30px;">www.livel.pro</p>
+                <p style="font-size: 1.5rem; opacity: 0.8; margin-top: 20px;">Tecnología que entiende</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button onclick="prevScene()">← Anterior</button>
+        <button onclick="togglePlay()" id="playBtn">▶ Reproducir</button>
+        <button onclick="nextScene()">Siguiente →</button>
+        <button onclick="restart()">↺ Reiniciar</button>
+    </div>
+    
+    <script>
+        let currentScene = 1;
+        const totalScenes = 7;
+        let isPlaying = false;
+        let playInterval = null;
+        
+        function updateScene(sceneNum) {
+            if (sceneNum < 1 || sceneNum > totalScenes) return;
+            
+            document.querySelectorAll('.scene').forEach(scene => {
+                scene.classList.remove('active');
+            });
+            
+            const scene = document.querySelector(`[data-scene="${sceneNum}"]`);
+            if (scene) {
+                scene.classList.add('active');
+                currentScene = sceneNum;
+                updateProgress();
+                updateCounter();
+                
+                // Crear partículas si la escena las tiene
+                const particlesContainer = scene.querySelector('.particles');
+                if (particlesContainer && particlesContainer.children.length === 0) {
+                    createParticles(particlesContainer);
+                }
+            }
+        }
+        
+        function createParticles(container) {
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (5 + Math.random() * 3) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        function updateProgress() {
+            const progress = (currentScene / totalScenes) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        function updateCounter() {
+            document.getElementById('counter').textContent = `${currentScene} / ${totalScenes}`;
+        }
+        
+        function nextScene() {
+            if (currentScene < totalScenes) {
+                updateScene(currentScene + 1);
+            } else {
+                updateScene(1); // Loop
+            }
+        }
+        
+        function prevScene() {
+            if (currentScene > 1) {
+                updateScene(currentScene - 1);
+            }
+        }
+        
+        function togglePlay() {
+            const btn = document.getElementById('playBtn');
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                btn.textContent = '⏸ Pausar';
+                playInterval = setInterval(() => {
+                    nextScene();
+                }, 5000); // 5 segundos por escena
+            } else {
+                btn.textContent = '▶ Reproducir';
+                if (playInterval) {
+                    clearInterval(playInterval);
+                }
+            }
+        }
+        
+        function restart() {
+            if (playInterval) {
+                clearInterval(playInterval);
+            }
+            isPlaying = false;
+            document.getElementById('playBtn').textContent = '▶ Reproducir';
+            updateScene(1);
+        }
+        
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextScene();
+            if (e.key === 'ArrowLeft') prevScene();
+            if (e.key === ' ') {
+                e.preventDefault();
+                togglePlay();
+            }
+        });
+        
+        // Inicializar
+        updateProgress();
+        updateCounter();
+    </script>
+
+
+</body></html>
